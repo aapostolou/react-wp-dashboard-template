@@ -1,0 +1,19 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#wpwrap,
+#wpcontent,
+#wpbody,
+#wpbody-content {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+}
+
+#root {
+  flex: 1;
+}
