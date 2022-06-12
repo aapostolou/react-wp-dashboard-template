@@ -20,7 +20,7 @@ const CopyToClipboard = ({ text }) => {
   }
 
   return (
-    <Tooltip title={translate('COPY_TO_CLIPBOARD')}>
+    <Tooltip title={translate('COPY_TO_CLIPBOARD')} disableInteractive>
       <IconButton onClick={handleClick}>
         <ContentCopyIcon />
       </IconButton>

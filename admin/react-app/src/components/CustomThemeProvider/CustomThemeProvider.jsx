@@ -3,8 +3,8 @@ import { CssBaseline } from '@mui/material/'
 
 import { useTheme } from '../../customization'
 
-const CustomThemeProvider = ({ children }) => {
-  const theme = useTheme({})
+const CustomThemeProvider = ({ customTheme = {}, children }) => {
+  const theme = useTheme(customTheme)
 
   return (
     <ThemeProvider theme={theme}>

@@ -14,7 +14,12 @@ import { Box, Button, Stack, TextField } from '@mui/material'
 
 import { styles } from './styles'
 
-const LoginForm = ({ logIn, validateToken, hasPassedInitialValidation }) => {
+const LoginForm = ({
+  logIn,
+  validateToken,
+  hasPassedInitialValidation,
+  sx = {},
+}) => {
   const { translate } = useTranslation()
 
   const [username, setUsername] = useState()
@@ -41,7 +46,7 @@ const LoginForm = ({ logIn, validateToken, hasPassedInitialValidation }) => {
   }, [])
 
   return (
-    <Box sx={styles.container}>
+    <Box sx={{ ...styles.container, ...sx }}>
       {hasPassedInitialValidation && (
         <Stack spacing={2} sx={styles.stack}>
           <TextField
@@ -60,7 +65,7 @@ const LoginForm = ({ logIn, validateToken, hasPassedInitialValidation }) => {
             disabled={!canSubmit}
             onClick={handleSubmitButton}
           >
-            {translate('SUBMIT')}
+            {translate('LOGIN_SUBMIT_BUTTON')}
           </Button>
         </Stack>
       )}

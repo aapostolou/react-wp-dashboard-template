@@ -1,11 +1,11 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 
-import App from "./App";
-import { Provider } from "./models";
+import App from './App'
+import { Provider } from './models'
 
-const rootElement = document.getElementById("root");
-const root = createRoot(rootElement);
+const rootElement = document.getElementById('root')
+const root = createRoot(rootElement)
 
 root.render(
   <StrictMode>
@@ -13,4 +13,4 @@ root.render(
       <App />
     </Provider>
   </StrictMode>
-);
+)

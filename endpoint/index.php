@@ -163,17 +163,17 @@ class ReactWPDashboard_Endpoint
     return (object) array('code' => 'success');
   }
 
-  /* Label */
-  private static function validate_field_label($label)
+  /* Text Field */
+  private static function validate_field_text($field, $name)
   {
-    if (!self::check_variable(trim($label))) {
-      return self::missing_field_error('label');
+    if (!self::check_variable(trim($field))) {
+      return self::missing_field_error($name);
     }
 
     $pattern = "/.{3,}/";
 
-    if (!preg_match($pattern, trim($label))) {
-      return self::error_result('Label needs to be at least 3 characters long.');
+    if (!preg_match($pattern, trim($field))) {
+      return self::error_result("$name needs to be at least 3 characters long.");
     }
     return (object) array('code' => 'success');
   }

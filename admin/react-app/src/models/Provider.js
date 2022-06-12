@@ -8,7 +8,8 @@ import { configStore } from './lib'
 import { reducer as languageReducer, epics as languageEpics } from './language'
 import { reducer as userReducer, epics as userEpics } from './user'
 import { reducer as generalReducer, epics as generalEpics } from './general'
-import { reducer as formsReducer, epics as formsEpics } from './forms'
+import { reducer as formsReducer } from './forms'
+import { reducer as popupReducer } from './popup'
 
 // Adding all the necessary reducers here
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   general: generalReducer,
   forms: formsReducer,
+  popup: popupReducer,
 })
 
 // Adding all the necessary epics here

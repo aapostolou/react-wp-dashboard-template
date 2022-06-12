@@ -1,4 +1,5 @@
-import { CustomThemeProvider, Debugger } from './components'
+import { CustomThemeProvider } from './containers'
+import { Debugger } from './components'
 import {
   GlobalSpinner,
   TranslationsProvider,
@@ -8,7 +9,9 @@ import {
 
 import { isDev } from './utils'
 
-import './styles.css'
+if (isDev) {
+  import('./styles.css')
+}
 
 const App = () => (
   <CustomThemeProvider>

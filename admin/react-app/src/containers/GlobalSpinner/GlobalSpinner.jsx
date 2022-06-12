@@ -3,4 +3,10 @@ import { isSpinnerEnabled } from '../../models/general'
 
 import { Spinner } from '../../components'
 
-export default withProps({ isOpen: isSpinnerEnabled })(Spinner)
+import { styles } from './styles'
+
+const GlobalSpinner = ({ isOpen }) => (
+  <Spinner isOpen={isOpen} sx={styles.spinner} />
+)
+
+export default withProps({ isOpen: isSpinnerEnabled })(GlobalSpinner)

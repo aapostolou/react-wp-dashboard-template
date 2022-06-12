@@ -1,4 +1,4 @@
-<?
+<?php
 
 $table_name = 'test_table';
 

@@ -2,38 +2,45 @@ import { translations } from '../../customization'
 
 export const translateWithLanguage = (language) => ({
   translate: (token, rest) => {
-    // if token doesn't exists
-    if (!translations[token]) {
+    let translationsToCheck = null
+
+    // if token is an object
+    if (typeof token === 'object') {
+      translationsToCheck = token
+    } else if (translations[token]) {
+      // if token exists in the hardcoded translations
+      translationsToCheck = translations[token]
+    } else {
       return token
     }
 
     // if translation is a function
-    if (typeof translations[token] === 'function') {
-      return translations[token]({ ...rest })
+    if (typeof translationsToCheck === 'function') {
+      return translationsToCheck({ ...rest })
     }
 
-    // if translation is an object of language and has the specific language
-    if (translations[token][language]) {
+    // if translation is an object of languages and has the specific language
+    if (translationsToCheck[language]) {
       // if specific translation is function
-      if (typeof translations[token][language] === 'function') {
-        return translations[token][language]({ ...rest })
+      if (typeof translationsToCheck[language] === 'function') {
+        return translationsToCheck[language]({ ...rest })
       } else {
-        return translations[token][language]
+        return translationsToCheck[language]
       }
     }
 
     // if translation has a fallback value
-    if (translations[token]._default) {
-      if (typeof translations[token]._default === 'function') {
-        return translations[token]._default({ ...rest })
+    if (translationsToCheck._default) {
+      if (typeof translationsToCheck._default === 'function') {
+        return translationsToCheck._default({ ...rest })
       } else {
-        return translations[token]._default
+        return translationsToCheck._default
       }
     }
 
     // if nothing else works
-    if (typeof translations[token] === 'string') {
-      return translations[token]
+    if (typeof translationsToCheck === 'string') {
+      return translationsToCheck
     } else {
       return token
     }

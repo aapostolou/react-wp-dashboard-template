@@ -6,11 +6,11 @@ import { changeLanguage } from './actions'
 const handleChangeLanguageEpic = (action$, state$) =>
   action$.pipe(
     ofType(changeLanguage.type),
-    map(() => {
-      const { payload } = action$
+    map((action) => {
+      const { payload } = action
       const { available } = state$.value.language
 
-      available.includes(payload)
+      return available.includes(payload)
         ? changeLanguage.succeeded(payload)
         : changeLanguage.failed('Language not available')
     })

@@ -10,7 +10,7 @@ class ReactWPDashboard_Database
 
   static function init()
   {
-    include_once plugin_dir_path(__FILE__) . "test.php";
+    include plugin_dir_path(__FILE__) . "test.php";
   }
 
   private static function check_table($table_name)
@@ -20,7 +20,7 @@ class ReactWPDashboard_Database
     return $wpdb->get_var('SHOW TABLES LIKE "' . $table_name . '"') != $table_name;
   }
 
-  private static function create_table_name($name)
+  public static function create_table_name($name)
   {
     global $wpdb;
 
@@ -38,5 +38,32 @@ class ReactWPDashboard_Database
       require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
       dbDelta($query_create);
     }
+  }
+
+  private static function get_created_tables()
+  {
+    global $wpdb;
+
+    $result = $wpdb->get_results("SELECT table_name FROM information_schema.tables WHERE table_name LIKE '" . $wpdb->prefix . self::$table_prefix . "%'");
+
+    $created_tables = [];
+    foreach ($result as $value) {
+      array_push($created_tables, $value->table_name);
+    }
+
+    return $created_tables;
+  }
+
+  private static function delete_created_tables()
+  {
+    global $wpdb;
+
+    $wpdb->query("SET FOREIGN_KEY_CHECKS = 0");
+
+    foreach (self::get_created_tables() as $table) {
+      $wpdb->query("DROP TABLE $table");
+    }
+
+    $wpdb->query("SET FOREIGN_KEY_CHECKS = 1");
   }
 }
